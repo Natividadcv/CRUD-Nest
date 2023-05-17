@@ -9,8 +9,9 @@ import { ApiTags } from '@nestjs/swagger';
 export class ItemsController {
   constructor(private readonly itemsService: ItemsService) {}
 
-  @Post()
+  @Post() // TODO: Entra en el post de http://localhost:3000/items
   create(@Body() createItemDto: CreateItemDto) {
+    // TODO: Aqui viene todo enviado desde el body
     return this.itemsService.create(createItemDto);
   }
 
