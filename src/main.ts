@@ -7,6 +7,7 @@ import { ValidationPipe } from '@nestjs/common';
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   const config = new DocumentBuilder()
+  .addBearerAuth() // TODO: Agregamos el bearer auth para que nos pida el token en la documentacion de swagger
   .setTitle('Mi API documentacion')
   .setDescription('The cats API description')
   .setVersion('1.0')

@@ -12,8 +12,9 @@ datasource db {
 
 model User {
   idUser    Int     @default(autoincrement()) @id
-  email String  @unique
+  email String  @unique // el email es unico
   name  String?
+  password String 
   posts Post[]
   items Items[] // relacion de uno a muchos con items 
 }
