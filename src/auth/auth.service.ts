@@ -17,11 +17,17 @@ export class AuthService {
         ) {}
     
   async register(userObjet: RegisterAuthDto) {
-   const {password} = userObjet // TODO password en texto plano
-   const plainToHash = await hash(password,10) // TODO password encriptado
-   userObjet = {...userObjet, password: plainToHash} // TODO sobreescribiendo el password en texto plano por el password encriptado
+  
+    try {
+        const {password} = userObjet // TODO password en texto plano
+        const plainToHash = await hash(password,10) // TODO password encriptado
+        userObjet = {...userObjet, password: plainToHash} // TODO sobreescribiendo el password en texto plano por el password encriptado
 
-   return this.prisma.user.create({ data : userObjet})
+
+        return this.prisma.user.create({ data : userObjet})
+    } catch (error) {
+        console.log(error)
+    }
 
 
   }

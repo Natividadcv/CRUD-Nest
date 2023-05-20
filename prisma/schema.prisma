@@ -17,6 +17,7 @@ model User {
   password String 
   posts Post[]
   items Items[] // relacion de uno a muchos con items 
+  productos Productos[] // relacion de uno a muchos con productos
 }
 
 model Post {
@@ -30,8 +31,20 @@ model Post {
 model Items {
     idItems        Int      @default(autoincrement()) @id
     name      String
-    description     String?
+    description     String? // el signo de interrogacion es para que sea opcional
     // user      User?    @relation(fields: [userId], references: [idUser]) // relacion de uno a muchos con user
     user           User?    @relation(fields: [userId], references: [idUser], onDelete: Restrict, onUpdate: Restrict) // relacion de uno a muchos con user con restriccion de borrado y actualizacion sirve para que no se borre el usuario si tiene items relacionados
     userId    Int?
 }
+
+model Productos {
+    idProducto      Int     @default(autoincrement()) @id
+    nombre          String 
+    descripcion     String
+    fehcaCreacion   DateTime   @default(now())
+    fechaActualizacion DateTime   @updatedAt
+    precio          Float
+    user           User?    @relation(fields: [userId], references: [idUser], onDelete: Restrict, onUpdate: Restrict) // relacion de uno a muchos con user con restriccion de borrado y actualizacion sirve para que no se borre el usuario si tiene items relacionados
+    userId Int?
+}
+
