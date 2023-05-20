@@ -48,3 +48,42 @@ model Productos {
     userId Int?
 }
 
+model plazo {
+  idPlazo                                               Int @id @default(autoincrement())
+  nombre                                                String @db.VarChar(100)
+  codigo                                                Int
+  descripcion                                           String @db.VarChar(100)
+  createdAt                                             DateTime @db.DateTime @default(dbgenerated("NOW()"))
+  updatedAt                                             DateTime @db.DateTime @default(dbgenerated("NOW() ON UPDATE NOW()"))
+  activo                                                Boolean @default(true)
+}
+
+model pais_mh {
+  idPais                                                Int @id @default(autoincrement())
+  codigo                                                Int
+  nombre                                                String @db.VarChar(100)
+  departamentos                                         departamento_mh[]
+}
+
+model departamento_mh {
+  idDepartamento                                        Int         @id @default(autoincrement())
+  nombre                                                String @db.VarChar(100)
+  codigo                                                Int
+  descripcion                                           String @db.VarChar(100)
+  zona                                                  String @db.VarChar(100)
+  idPais                                                Int
+  pais                                                  pais_mh        @relation(fields: [idPais], references: [idPais])
+  municipios                                            municipio_mh[]
+
+  @@index([idPais], name: "idx_id_pais")
+}
+
+model municipio_mh {
+  idMunicipio                                            Int         @id @default(autoincrement())
+  codigo                                                 Int
+  descripcion                                            String @db.VarChar(100)
+  idDepartamento                                         Int
+  departamento departamento_mh                           @relation(fields: [idDepartamento], references: [idDepartamento])
+
+  @@index([idDepartamento], name: "idx_id_departamento")
+}
