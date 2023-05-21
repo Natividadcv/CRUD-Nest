@@ -15,18 +15,21 @@ async function bootstrap() {
   .addTag('country')
   .build();
 
-//   app.useGlobalPipes(
-//     new ValidationPipe({
-//         whitelist: true, // TODO: Esto es para que solo se acepten los campos que estan en el DTO
-//         forbidNonWhitelisted: true, // TODO: Esto es para que si se envia un campo que no esta en el DTO, se rechace la peticion
-//         transform: true, // TODO: Esto es para que los parametros que vienen en la peticion se transformen al tipo de dato que se espera en el DTO
-//     })
-//   )
+  app.useGlobalPipes(
+    new ValidationPipe({
+        whitelist: true, // TODO: Esto es para que solo se acepten los campos que estan en el DTO
+        forbidNonWhitelisted: true, // TODO: Esto es para que si se envia un campo que no esta en el DTO, se rechace la peticion
+        transform: true, // TODO: Esto es para que los parametros que vienen en la peticion se transformen al tipo de dato que se espera en el DTO
+    })
+  )
+
+
 
 
 const document = SwaggerModule.createDocument(app, config);
     SwaggerModule.setup('documentacion', app, document);
     app.useGlobalPipes(new ValidationPipe());
+    
 
     await app.listen(3000);
 }
