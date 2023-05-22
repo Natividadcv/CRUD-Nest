@@ -1,5 +1,5 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, Query } from '@nestjs/common';
-import { MunicipioService } from './municipio.service';
+import { Controller, Get, Query } from '@nestjs/common';
+import { MunicipioService, PlazoService } from './municipio.service';
 
 
 @Controller('municipio')
@@ -13,5 +13,16 @@ export class MunicipioController {
   ) {
     return this.municipioService.findAllMunicipio(filter, idDepartamento);
   }
-
 }
+
+@Controller('plazo')
+export class PlazoController {
+    constructor(private readonly PlazoService: PlazoService) {}
+
+    @Get()
+    async findAllPlazo(@Query('nombre') filter? : string){
+        return this.PlazoService.findAllPlazo(filter);
+    }
+}
+
+
