@@ -7,6 +7,7 @@ import { AuthModule } from './auth/auth.module';
 import { ProductsModule } from './products/products.module';
 import { CountryModule } from './country/country.module';
 import { DepartamentoModule } from './departamento/departamento.module';
+import { MunicipioModule } from './municipio/municipio.module';
 
 @Module({
   imports: [
@@ -14,7 +15,8 @@ import { DepartamentoModule } from './departamento/departamento.module';
     AuthModule,
     ProductsModule,
     CountryModule,
-    DepartamentoModule
+    DepartamentoModule,
+    MunicipioModule
 ],
   controllers: [AppController],
   providers: [AppService, PrismaService],
